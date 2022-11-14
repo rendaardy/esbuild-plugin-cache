@@ -7,8 +7,8 @@ import { join } from 'https://deno.land/std@0.163.0/path/mod.ts'
 type Loader = 'js' | 'jsx' | 'ts' | 'tsx' | 'css' | 'json' | 'text' | 'base64' | 'file' | 'dataurl' | 'binary' | 'default';
 
 interface Config {
-  importmap: { imports: { [key: string]: string } }
-  directory: string
+  importmap?: { imports: { [key: string]: string } }
+  directory?: string
 }
 
 export function cache({ importmap = { imports: {} }, directory }: Config): Plugin {
