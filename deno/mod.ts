@@ -1,7 +1,7 @@
-import { Plugin } from 'https://deno.land/x/esbuild@v0.12.1/mod.d.ts'
+import { Plugin } from 'https://deno.land/x/esbuild@v0.15.13/mod.js'
 import * as Cache from 'https://deno.land/x/cache@0.2.13/mod.ts'
 import { resolve } from 'https://deno.land/x/importmap@0.1.4/mod.ts'
-import { join } from 'https://deno.land/std@0.97.0/path/mod.ts'
+import { join } from 'https://deno.land/std@0.163.0/path/mod.ts'
 
 //prettier-ignore
 type Loader = 'js' | 'jsx' | 'ts' | 'tsx' | 'css' | 'json' | 'text' | 'base64' | 'file' | 'dataurl' | 'binary' | 'default';
@@ -16,7 +16,7 @@ export function cache({ importmap = { imports: {} }, directory }: Config): Plugi
   return {
     name: 'deno-cache',
     setup(build) {
-      build.onResolve({ filter: /.*/ }, async (args) => {
+      build.onResolve({ filter: /.*/ }, (args) => {
         const resolvedPath = resolve(args.path, importmap)
         if (resolvedPath.startsWith('http')) {
           return {
